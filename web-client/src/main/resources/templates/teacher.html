@@ -1,0 +1,79 @@
+<!doctype html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+
+    <title>Профиль учителя</title>
+
+</head>
+<body>
+
+<header th:insert="block/header::header"></header>
+<div class="container-fluid pt-5 pb-5">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-sm">
+                <h1>Личные данные учителя</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div  class="container-fluid">
+
+        <div class="row text-center">
+            <div th:object="${teacher}" class="col-sm">
+
+                <img th:if="${teacher.foto}" th:src="@{'/image/'+${teacher.foto}}" class="rounded mx-auto d-block" width="300" height="300" alt="avatar">
+                <img th:if="!${teacher.foto}" th:src="@{/img/avatar.png}" class="rounded mx-auto d-block"  width="300" height="300" alt="avatar">
+                <a th:if="!${admin}" href="#" class ="link" data-toggle="modal" data-target="#loadImgModal"><h5>Загрузить фотографию</h5></a>
+            </div>
+
+            <div class="col-sm">
+               <h4><p th:text="${teacher.surname}"/>
+                <p th:text="${teacher.firstname}"/>
+                <p th:text="${teacher.middlename}"/>
+               Категория: <p th:text="${teacher.qualification}"/>
+                Email:<p th:text="${teacher.email}"/></h4>
+            </div>
+        </div>
+        <div th:if="${is_admin}" class="row text-center mt-4">
+            <div class="col-sm">
+                <a href="/teachers-view/" class="btn btn-secondary btn-lg">Работа с учетными записями учителей</a>
+            </div>
+        </div>
+        <div th:if="${is_admin}" class="row text-center mt-4">
+            <div class="col-sm">
+                <a href="/students-view/" class="btn btn-secondary  btn-lg">Работа с учетными записями учеников</a>
+            </div>
+        </div>
+    <div th:if="${is_admin}" class="row text-center mt-4">
+        <div class="col-sm">
+            <a href="/list-academic-discipline/" class="btn btn-secondary  btn-lg">Учебные дисциплины</a>
+        </div>
+    </div>
+    <div th:if="${is_admin}" class="row text-center mt-4">
+        <div class="col-sm">
+            <a href="/list-schools/" class="btn btn-secondary  btn-lg">Учебные заведения</a>
+        </div>
+    </div>
+    <div th:if="${is_admin}" class="row text-center mt-4">
+        <div class="col-sm">
+            <a href="/list-all-groups/" class="btn btn-secondary  btn-lg">Учебные классы</a>
+        </div>
+    </div>
+</div>
+
+<div th:insert="block/loadProfileFotoModal::loadProfileFotoModal"></div>
+<footer th:insert="block/footer::footer"></footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+</body>
+</html>

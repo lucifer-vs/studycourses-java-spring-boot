@@ -1,0 +1,139 @@
+<!doctype html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+
+    <title>Информация о курсе</title>
+
+</head>
+
+<body>
+
+<header th:insert="block/header::header"></header>
+
+<div class="container-fluid pt-5 pb-5">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-sm">
+                <h1 th:text="${course.name}"></h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="conteiner-fluid">
+    <div class="container">
+        <div  class="row text-center">
+            <div class="col-sm">
+
+                <img th:if="${course.image}" th:src="@{'/image/'+${course.image}}"  class="rounded mx-auto d-block" width="150" height="150" alt="logo">
+                <img th:if="!${course.image}" th:src="@{/img/notImg.jpeg}" class="rounded mx-auto d-block" width="150" height="150" alt="logo">
+                <a href="#" th:if="${is_not_student}" class ="link" data-toggle="modal" data-target="#loadImgCourseModal">Загрузить фотографию</a>
+            </div>
+
+            <div class="col-sm">
+                <h4 th:text="${course.description}"></h4>
+                <p th:text="'Учебная дисциплина: '+${course.academicDiscipline.name}"></p>
+            </div>
+        </div>
+
+
+        <div  class="row text-center pt-5 pb-5">
+            <div th:if="${is_not_student}"  class="col-sm">
+                <button class="btn btn-primary bg-dark"  type="button" data-toggle="modal" data-target="#newGroupModal">Успеваемость</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div  class="container-fluid">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-sm">
+                <a th:if="${is_not_student}"  th:href="'/newtask/'+${course.id_course}" class="btn btn-primary bg-dark">Создать новое задание</a>
+            </div>
+            <div class="col-sm">
+                    <a th:if="${is_not_student}" th:href="'/list-groups/'+${course.id_course}" class="btn btn-primary bg-dark">Список классов</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row pt-5 pb-5 pr-5 pl-5">
+        <div class="col-sm">
+            <table class="table table-striped table-dark">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Задание</th>
+                    <th scope="col">Срок</th>
+                    <th th:if="${is_student}" scope="col">Оценка</th>
+                    <th scope="col">Действия</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${is_not_student}" th:each="el:${tasks}">
+                    <td th:utext="${el.name}"></td>
+                    <td th:utext="${el.deadline}"></td>
+                    <td>
+                        <a th:href="'/task-info/'+${el.id_task}" class="btn btn-warning">Открыть</a>
+                        <a th:href="'/drop-task/'+${el.id_task}" class="btn btn-danger">Удалить</a>
+                    </td>
+                </tr>
+                <tr th:if="${is_student}" th:each="el:${performance}">
+                    <td th:utext="${el.task.name}"></td>
+                    <td th:utext="${el.task.deadline}"></td>
+                    <td th:utext="${el.grade}"></td>
+                    <td>
+                        <a th:href="'/task-info/'+${el.task.id_task}" class="btn btn-warning">Открыть</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div th:if="${is_not_student}" class="modal fade" id="newGroupModal" tabindex="-1" role="dialog" aria-labelledby="newGroupModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newGroupModalLabel">Формирование успеваемости</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form th:action="'/file/pdf/'+${course.id_course}" id="add" method="post">
+                    <label for="new">Классы</label>
+                    <select class="form-control" id="new" th:field="*{group.id_group}">
+                        <option th:each="el : ${study}"
+                                th:value="${el.studyGroup.id_group}"
+                                th:text="${el.studyGroup.name}+' '+${el.studyGroup.school.name}"
+                                th:selected="${el.studyGroup.id_group} == ${group.id_group}">
+                        </option>
+                    </select>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
+                <input form="add" class="btn btn-success" type="submit" value="Сформировать">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:insert="block/loadImgCourseModal::loadImgCourseModal"></div>
+<footer th:insert="block/footer::footer"></footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+</body>
+</html>

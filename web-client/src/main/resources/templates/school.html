@@ -1,0 +1,51 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+
+    <title>Учебные заведения</title>
+
+</head>
+
+<body>
+
+<header th:insert="block/header::header"></header>
+
+<div class="container-fluid pt-5 pb-5">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-sm">
+                <h1>Список учебных заведений</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row pt-5 pb-5 pr-5 pl-5">
+        <div class="col-sm">
+            <table  class="table table-striped table-dark">
+                <thead>
+                <tr class="text-center">
+                    <th scope="col">Наименование</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="text-center" th:each="el:${schools}">
+                    <td th:text="${el.name}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<footer th:insert="block/footer::footer"></footer>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+</body>
+</html>

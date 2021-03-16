@@ -1,0 +1,94 @@
+<!doctype html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+
+    <title>Работа с учетными записями</title>
+
+</head>
+<body>
+
+<header th:insert="block/header::header"></header>
+<div class="container-fluid pt-5 pb-5">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-sm">
+                <h1>Работа с учетными записями учителей</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-sm">
+                <button class="btn-lg btn-primary bg-dark"  type="button" data-toggle="modal" data-target="#loadTeachersModal">Загрузить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row pt-5 pb-5 pr-5 pl-5">
+    <div class="col-sm">
+        <table class="table table-striped table-dark">
+            <thead>
+            <tr>
+                <th scope="col">ФИО</th>
+                <th scope="col">Логин</th>
+                <th scope="col">Действия</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="teacher:${teachers}">
+                <td th:if="${teacher.middlename}" th:text="${teacher.surname}+' '+${teacher.firstname}+' '+${teacher.middlename}"></td>
+                <td th:if="!${teacher.middlename}" th:text="${teacher.surname}+' '+${teacher.firstname}"></td>
+                <td th:text="${teacher.login}"></td>
+                <td>
+                    <a th:href="'/teacher-info/'+${teacher.id_teacher}" class="btn btn-info">Просмотреть</a>
+                    <a th:href="'/teacher/edit/'+${teacher.id_teacher}" class="btn btn-warning">Редактировать</a>
+                    <a th:href="'/drop-teacher/'+${teacher.id_teacher}" class="btn btn-danger">Удалить</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="loadTeachersModal" tabindex="-1" role="dialog" aria-labelledby="loadTeachersModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loadTeachersModalLabel">Загрузка новых пользователей</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/load-teachers/" method="post" id="loading" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <input type="file" class="btn-info" name="file">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
+                <input form="loading" class="btn btn-primary" type="submit" value="Загрузить">
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:insert="block/footer::footer"></footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+</body>
+</html>

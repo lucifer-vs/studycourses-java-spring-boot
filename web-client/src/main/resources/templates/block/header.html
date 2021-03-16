@@ -1,0 +1,32 @@
+<div th:fragment="header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
+        <a href="/" class="navbar-brand">
+            <img th:src="@{/img/logo.png}"  width="50" height="50" alt="logo">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls = "navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="form-inline">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item ">
+                        <a href="/" class ="nav-link">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/profile" class ="nav-link">Профиль</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/courses" class ="nav-link">Курсы</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout" class ="nav-link">Выход</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+</div>

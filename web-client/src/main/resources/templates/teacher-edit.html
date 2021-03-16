@@ -1,0 +1,75 @@
+<!doctype html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+
+    <title>Профиль Учителя</title>
+
+</head>
+
+<body>
+<header th:insert="block/header::header"></header>
+<div class="container-fluid pt-5 pb-5">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-sm">
+                <h1>Личные данные учителя</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div  class="conteiner-fluid">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-sm">
+
+                <img th:if="${teacher.foto}" th:src="@{'/image/'+${teacher.foto}}" class="rounded mx-auto d-block"  width="300" height="300" alt="avatar">
+                <img th:if="!${teacher.foto}" th:src="@{/img/avatar.png}" class="rounded mx-auto d-block"  width="300" height="300" alt="avatar">
+            </div>
+
+            <div class="col-sm">
+
+                <h4>
+                    <label for="surname">Фамилия</label>
+                    <input type="text" form="loading" th:value="*{teacher.surname}" id="surname" name="surname" class="form-control"><br>
+                    <label for="firstname">Имя</label>
+                    <input type="text" form="loading" th:value="*{teacher.firstname}" id="firstname" name="firstname" class="form-control"><br>
+                    <label for="middlename">Отчество</label>
+                    <input type="text" form="loading" th:value="*{teacher.middlename}" id="middlename" name="middlename" class="form-control"><br>
+
+
+                    <label for="qualification">Квалификация</label>
+                    <input type="text" form="loading" th:value="*{teacher.qualification}" id="qualification" name="qualification" class="form-control"><br>
+                    <label for="email">Email</label>
+                    <input type="text" form="loading" th:value="*{teacher.email}" id="email" name="email" class="form-control"><br>
+                    <label for="login">Логин</label>
+                    <input type="text" form="loading" th:value="*{teacher.login}" id="login" name="login" class="form-control"><br>
+                    <label for="password">Пароль</label>
+                    <input type="password" form="loading" th:value="*{teacher.password}" id="password" name="password" class="form-control"><br>
+
+                    <form th:action="'/save-teacher/'+${teacher.id_teacher}" id="loading" method="post">
+                        <button form="loading" class="btn-lg btn-success" type="submit">Сохранить</button>
+                    </form>
+
+                </h4>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div th:insert="block/loadProfileFotoModal::loadProfileFotoModal"></div>
+<footer th:insert="block/footer::footer"></footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+</body>
+</html>

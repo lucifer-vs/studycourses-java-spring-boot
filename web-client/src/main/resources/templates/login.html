@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/my.css}"/> <!-- подключаем файл стилей -->
+
+    <title>Страница авторизации</title>
+
+
+</head>
+<body>
+
+<div class="container-fluid bg-dark">
+    <div class="form-row">
+
+        <div class="col-md-offset-3 col-md-6 ">
+            <form  class="form-horizontal" th:action="@{/login}" method='POST'>
+                <span class="heading">АВТОРИЗАЦИЯ</span>
+                <div th:if="${param.error}">
+                    <div class="alert alert-danger">
+                        Неверный логин или пароль.
+                    </div>
+                </div>
+                <div class="form-froup">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Логин" required>
+                    <i class="fa fa-user"></i>
+                </div>
+
+                <div class="form-froup help">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Пароль" required>
+                    <i class="fa fa-lock"></i>
+                </div>
+                <div class="form-froup">
+                    <input type="submit" class="btn btn-default" value="ВХОД"></input>
+                </div>
+            </form>
+        </div>
+    </div><!-- /.row -->
+</div><!-- /.container -->
+
+</body>
+</html>

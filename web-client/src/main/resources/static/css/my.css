@@ -1,0 +1,139 @@
+
+/* Form Style */
+.form-row {
+	height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.form-horizontal{
+ background: #fff;
+ padding-bottom: 40px;
+ border-radius: 15px;
+ text-align: center;
+}
+.form-horizontal .heading{
+ display: block;
+ font-size: 35px;
+ font-weight: 700;
+ padding: 35px 0;
+ border-bottom: 1px solid #f0f0f0;
+ margin-bottom: 30px;
+}
+.form-horizontal .form-froup{
+ padding: 0 40px;
+ margin: 0 0 25px 0;
+ position: relative;
+}
+.form-horizontal .form-control{
+ background: #f0f0f0;
+ border: none;
+ border-radius: 20px;
+ box-shadow: none;
+ padding: 0 20px 0 45px;
+ height: 40px;
+ transition: all 0.3s ease 0s;
+}
+.form-horizontal .form-control:focus{
+ background: #e0e0;
+ box-shadow: none;
+ outline: 0 none;
+}
+.form-horizontal .form-froup i{
+ position: absolute;
+ top: 12px;
+ left: 60px;
+ font-size: 17px;
+ color: #c8c8c8;
+ transition : all 0.5s ease 0s;
+}
+.form-horizontal .form-control:focus + i{
+ color: #00b4ef;
+}
+.form-horizontal .fa-question-circle{
+ display: inline-block;
+ position: absolute;
+ top: 12px;
+ right: 60px;
+ font-size: 20px;
+ color: gray;
+ transition: all 0.5s ease 0s;
+}
+.form-horizontal .fa-question-circle:hover{
+ color: black;
+}
+
+.form-horizontal .text{
+ float: left;
+ margin-left: 7px;
+ line-height: 20px;
+ padding-top: 5px;
+ text-transform: capitalize;
+}
+.form-horizontal .btn{
+ float: center;
+ font-size: 14px;
+ color: #fff;
+ background: gray;
+ border-radius: 30px;
+ padding: 10px 25px;
+ border: none;
+ text-transform: capitalize;
+ transition: all 0.5s ease 0s;
+}
+@media only screen and (max-width: 479px){
+ .form-horizontal .form-froup{
+ padding: 0 25px;
+ }
+ .form-horizontal .fform-froup i{
+ left: 45px;
+ }
+ .form-horizontal .btn{
+ padding: 10px 20px;
+ }
+}
+
+@media (min-width: 768px) {
+  .form-search .combobox-container,
+  .form-inline .combobox-container {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: top;
+  }
+  .form-search .combobox-container .input-group-addon,
+  .form-inline .combobox-container .input-group-addon {
+    width: auto;
+  }
+}
+.combobox-selected .caret {
+  display: none;
+}
+/* :not doesn't work in IE8 */
+.combobox-container:not(.combobox-selected) .glyphicon-remove {
+  display: none;
+}
+.typeahead-long {
+  max-height: 300px;
+  overflow-y: auto;
+}
+.control-group.error .combobox-container .add-on {
+  color: #B94A48;
+  border-color: #B94A48;
+}
+.control-group.error .combobox-container .caret {
+  border-top-color: #B94A48;
+}
+.control-group.warning .combobox-container .add-on {
+  color: #C09853;
+  border-color: #C09853;
+}
+.control-group.warning .combobox-container .caret {
+  border-top-color: #C09853;
+}
+.control-group.success .combobox-container .add-on {
+  color: #468847;
+  border-color: #468847;
+}
+.control-group.success .combobox-container .caret {
+  border-top-color: #468847;
+}
